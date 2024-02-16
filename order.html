@@ -31,16 +31,117 @@
             <span>Iceberg Lettuce</span>
             <span class="price">2.49</span>
             <input class="quantity-input" type="number" placeholder="Qty" min="1" />
-            <button class="add-to-cart">Add to Cart</button>
+            <button class="add-to-cart">+</button>
         </div>
-        <!-- Repeat above div for each item, with the appropriate names -->
-        <!-- ... -->
+        <div class="item">
+            <span>Romaine Lettuce</span>
+            <span class="price">3.19</span>
+            <input class="quantity-input" type="number" placeholder="Qty" min="1" />
+            <button class="add-to-cart">+</button>
+        </div>
+        <div class="item">
+            <span>Organic Broccoli Florets</span>
+            <span class="price">4.29</span>
+            <input class="quantity-input" type="number" placeholder="Qty" min="1" />
+            <button class="add-to-cart">+</button>
+        </div>
+        <div class="item">
+            <span>Organic Red Cabbage ($/lb)</span>
+            <span class="price">1.49</span>
+            <input class="quantity-input" type="number" placeholder="Qty" min="1" />
+            <button class="add-to-cart">+</button>
+        </div>
+        <div class="item">
+            <span>Organic Garlic ($/lb)</span>
+            <span class="price">5.99</span>
+            <input class="quantity-input" type="number" placeholder="Qty" min="1" />
+            <button class="add-to-cart">+</button>
+        </div>
+        <div class="item">
+            <span>Red Onion ($/lb)</span>
+            <span class="price">1.79</span>
+            <input class="quantity-input" type="number" placeholder="Qty" min="1" />
+            <button class="add-to-cart">+</button>
+        </div>
+        <div class="item">
+            <span>Bagged Yellow Onions</span>
+            <span class="price">3.99</span>
+            <input class="quantity-input" type="number" placeholder="Qty" min="1" />
+            <button class="add-to-cart">+</button>
+        </div>
+        <div class="item">
+            <span>Bagged Sweet Onions</span>
+            <span class="price">4.29</span>
+            <input class="quantity-input" type="number" placeholder="Qty" min="1" />
+            <button class="add-to-cart">+</button>
+        </div>
+        <div class="item">
+            <span>Vine Ripe Tomatoes ($/lb)</span>
+            <span class="price">1.99</span>
+            <input class="quantity-input" type="number" placeholder="Qty" min="1" />
+            <button class="add-to-cart">+</button>
+        </div>
+        <div class="item">
+            <span>Organic Grape Tomatoes</span>
+            <span class="price">3.89</span>
+            <input class="quantity-input" type="number" placeholder="Qty" min="1" />
+            <button class="add-to-cart">+</button>
+        </div>
+        <div class="item">
+            <span>Green Beans</span>
+            <span class="price">6.49</span>
+            <input class="quantity-input" type="number" placeholder="Qty" min="1" />
+            <button class="add-to-cart">+</button>
+        </div>
+        <div class="item">
+            <span>Cilantro Bunch</span>
+            <span class="price">0.89</span>
+            <input class="quantity-input" type="number" placeholder="Qty" min="1" />
+            <button class="add-to-cart">+</button>
+        </div>
+        <div class="item">
+            <span>Organic Thyme</span>
+            <span class="price">2.99</span>
+            <input class="quantity-input" type="number" placeholder="Qty" min="1" />
+            <button class="add-to-cart">+</button>
+        </div>
+        <div class="item">
+            <span>Slicing Cucumber</span>
+            <span class="price">0.89</span>
+            <input class="quantity-input" type="number" placeholder="Qty" min="1" />
+            <button class="add-to-cart">+</button>
+        </div>
+        <div class="item">
+            <span>Zucchini Squash ($/lb)</span>
+            <span class="price">1.99</span>
+            <input class="quantity-input" type="number" placeholder="Qty" min="1" />
+            <button class="add-to-cart">+</button>
+        </div>
+        <div class="item">
+            <span>Green Bell Pepper ($/lb)</span>
+            <span class="price">1.79</span>
+            <input class="quantity-input" type="number" placeholder="Qty" min="1" />
+            <button class="add-to-cart">+</button>
+        </div>
+        <div class="item">
+            <span>Red Bell Pepper</span>
+            <span class="price">4.49</span>
+            <input class="quantity-input" type="number" placeholder="Qty" min="1" />
+            <button class="add-to-cart">+</button>
+        </div>
+        <div class="item">
+            <span>Green Jalapeno Pepper ($/lb)</span>
+            <span class="price">1.99</span>
+            <input class="quantity-input" type="number" placeholder="Qty" min="1" />
+            <button class="add-to-cart">+</button>
+        </div>
     </div>
 
     <h2>Shopping Cart</h2>
     <div id="cart">
         <div>Subtotal: $<span id="subtotal">0.00</span></div>
         <button onclick="checkout()">Proceed to Checkout</button>
+        <button onclick="resetSubtotal()">Reset Subtotal</button>
     </div>
 
     <script>
@@ -72,8 +173,13 @@
         function checkout() {
             // For now, just alert the total
             const subtotalElement = document.getElementById('subtotal');
-            alert('Your total is: $' + subtotalElement.textContent);
-            // Here you would implement the actual checkout functionality
+            // can probably send this to database
+            window.location.href = 'checkout.html'
+        }
+
+        function resetSubtotal() {
+            //resets subtotal to 0
+            document.getElementById('subtotal').textContent = '0.00';
         }
     </script>
 </body>
