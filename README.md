@@ -40,4 +40,4 @@ The application implements best practices for security, ensuring user data is pr
 
 ## Contact
 
-For more information or support, please contact support@freshhousefoods.com.
+For more information or support, please contact apk14961@uga.edu.
