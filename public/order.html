@@ -390,16 +390,14 @@ function checkout() {
         }
 
         function collectOrderData() {
-            const items = document.querySelectorAll('.item');
-            const orders = Array.from(items).map(item => {
-                return {
-                    item: item.querySelector('span:first-child').textContent,
-                    quantity: parseInt(item.querySelector('.quantity-input').value || '0', 10),
-                    price: parseFloat(item.querySelector('.price').textContent.replace('$', '')),
-                };
-            }).filter(order => order.quantity > 0);
+            const cartItems = JSON.parse(sessionStorage.getItem('cart')) || {};
+            const orders = Object.entries(cartItems).map(([item, details]) => ({
+                item: item,
+                quantity: details.quantity,
+                price: details.price
+            }));
 
-            const totalPrice = orders.reduce((acc, curr) => acc + (curr.quantity * curr.price), 0);
+            const totalPrice = orders.reduce((acc, order) => acc + (order.quantity * order.price), 0);
 
             return { orders, totalPrice };
         }
