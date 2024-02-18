@@ -55,3 +55,24 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
+
+app.post('/api/updateOrderWithEmail', async (req, res) => {
+    const { orderId, email } = req.body;
+
+    try {
+        // Find the order by orderId and update the email
+        const updatedOrder = await Order.findOneAndUpdate(
+            { orderId: orderId },
+            { email: email },
+            { new: true } // Returns the updated document
+        );
+
+        if(updatedOrder) {
+            res.json({ message: 'Email updated successfully!', order: updatedOrder });
+        } else {
+            res.status(404).json({ error: 'Order not found' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Error updating order' });
+    }
+});

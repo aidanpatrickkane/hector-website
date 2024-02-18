@@ -333,8 +333,35 @@ function checkout() {
         return;
     }
 
-    // Redirect to checkout page
-    window.location.href = 'checkout.html';
+    // Collect order data
+    const { orders, totalPrice } = collectOrderData();
+    const orderId = sessionStorage.getItem('orderId') || generateOrderId();
+
+    // Create order object with a placeholder for the email
+    const orderData = {
+        email: '', // Placeholder until the email is provided
+        orders: orders,
+        totalPrice: totalPrice,
+        orderId: orderId
+    };
+
+    // Send this data to the server to create an incomplete order entry
+    fetch('http://www.freshhousefoods.com/api/submitOrder', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(orderData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Incomplete order saved:', data);
+        // Redirect to checkout page
+        window.location.href = 'checkout.html';
+    })
+    .catch((error) => {
+        console.error('Error saving incomplete order:', error);
+    });
 }
 
         function resetSubtotal() {
