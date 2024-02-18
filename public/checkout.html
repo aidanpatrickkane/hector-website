@@ -1,27 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WXYEG9EW2M"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-WXYEG9EW2M');
+    </script>
     <meta charset="UTF-8">
     <title>Get Updates</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
         .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             width: 100%;
-            max-width: 600px;
-            margin: 0 auto;
+            max-width: 400px;
             text-align: center;
         }
         .email-input {
-            width: 70%;
-            padding: 10px;
-            margin: 20px 0;
+            width: 100%;
+            padding: 12px;
+            margin: 20px 0 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
         }
         .update-btn {
-            padding: 10px 20px;
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
             cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        .update-btn:hover {
+            background-color: #45a049;
+        }
+
+        #message p {
+            margin-top: 20px;
+            font-size: 16px;
+        }
+
+        #message p.error {
+            color: #D8000C;
         }
     </style>
 </head>
@@ -33,47 +73,48 @@
         
         <input type="email" class="email-input" placeholder="Email" id="email"/>
         <button class="update-btn" onclick="submitEmail()">Update Me</button>
+        <br>
+        <div id="message"></div>
     </div>
 
     <script>
         function submitEmail() {
-            var email = document.getElementById('email').value;
-            
-            // Here you'd typically make an AJAX request to your server-side script
-            // For example, if you're using a REST API, it might look something like this:
-            /*
-            fetch('https://yourserver.com/api/subscribe', {
+            const email = document.getElementById('email').value;
+            const cartItems = JSON.parse(sessionStorage.getItem('cart')) || {};
+            const orders = Object.entries(cartItems).map(([item, details]) => ({
+                item: item,
+                quantity: details.quantity,
+                price: details.price
+            }));
+            const totalPrice = orders.reduce((acc, order) => acc + (order.quantity * order.price), 0);
+            const orderId = sessionStorage.getItem('orderId') || ''; // Retrieve the order ID if you're using it
+
+            const orderData = {
+                email: email,
+                orders: orders,
+                totalPrice: totalPrice,
+                orderId: orderId // Include this only if you are handling it in your backend
+            };
+
+            fetch('http://localhost:3000/api/submitOrder', { // Make sure this matches your server endpoint
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ email: email })
+                body: JSON.stringify(orderData)
             })
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
-                // Handle success, perhaps show a thank you message
+                document.getElementById('message').innerHTML = "<p>Thank you for your order!</p>";
+                document.getElementById('email').value = '';
+                sessionStorage.clear(); // Optionally clear the session storage after order is placed
             })
             .catch((error) => {
                 console.error('Error:', error);
-                // Handle errors, perhaps show an error message
+                document.getElementById('message').innerHTML = "<p class='error'>Sorry, something went wrong with your order.</p>";
             });
-            */
-            
-            // For now, just log to the console
-            console.log('Email submitted:', email);
-            
-            // Reset the input field
-            document.getElementById('email').value = '';
         }
-
-        fetch('http://localhost:3000/api/subscribe', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ email: email })
-})
     </script>
 </body>
 </html>
