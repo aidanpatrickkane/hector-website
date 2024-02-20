@@ -6,10 +6,10 @@ Fresh House Foods is an online food ordering platform designed to bring fresh pr
 
 ## Features
 
-- Dynamic search bar for filtering produce based on user input.
-- Interactive shopping cart where users can specify the quantity of each item.
-- Temporary session storage of order details during the shopping experience.
-- Final user email input triggers the storage of order details into a MongoDB database.
+- Advanced search functionality enables precise filtering of produce based on user inputs.
+- Interactive cart allows for real-time adjustments of item quantities before checkout.
+- Session storage captures and retains order details for a seamless shopping journey.
+- Immediate cart content transmission to the database upon checkout, followed by email collection for comprehensive order tracking.
 
 ## Usage
 
